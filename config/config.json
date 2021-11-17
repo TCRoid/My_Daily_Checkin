@@ -1,0 +1,52 @@
+{
+  "luxury": [
+    {
+      "username": "账号",
+      "password": "密码"
+    },
+    {
+      "username": "第二个账号",
+      "password": "第二个密码"
+    }
+  ],
+  "NovaCloud": {
+    "username": "",
+    "password": ""
+  },
+  "zntx": {
+    "username": "",
+    "password": ""
+  },
+  "jlwz": {
+    "username": "",
+    "password": ""
+  },
+  "3DM": {
+    "username": "",
+    "password": ""
+  },
+  "picacg": {
+    "username": "",
+    "password": ""
+  },
+  "huluxia": {
+    "key": "",
+    "device_code": "",
+    "user_id": ""
+  },
+  "mt": {
+    "cookie": ""
+  },
+  "CSDN": {
+    "cookie": ""
+  },
+  "youdao": {
+    "cookie": ""
+  },
+  "smzdm": {
+    "cookie": ""
+  },
+  "tieba": {
+    "cookie": ""
+  }
+}
