@@ -9,6 +9,8 @@ password = ''
 headers = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36'
 }
+timeout = 10  # 超时时间
+retries = 3  # 超时重连次数
 
 
 # 登录
@@ -18,8 +20,14 @@ def login():
         'email': username,
         'passwd': password
     }
-    response = requests.post(url, data, headers=headers)
-    return response
+    i = 0
+    while i < retries:
+        try:
+            response = requests.post(url, data, headers=headers, timeout=timeout)
+            return response
+        except requests.exceptions.RequestException as e:
+            i += 1
+            print(e)
 
 
 # 获取cookies
@@ -31,15 +39,27 @@ def get_cookie(response):
 # 签到
 def checkin(cookies):
     url = 'https://www.q88q.cyou/user/checkin'
-    response = requests.post(url, cookies=cookies, headers=headers)
-    return response
+    i = 0
+    while i < retries:
+        try:
+            response = requests.post(url, cookies=cookies, headers=headers, timeout=timeout)
+            return response
+        except requests.exceptions.RequestException as e:
+            i += 1
+            print(e)
 
 
 # 登出
 def logout(cookies):
     url = 'https://www.q88q.cyou/user/logout'
-    response = requests.get(url, cookies=cookies, headers=headers)
-    return response
+    i = 0
+    while i < retries:
+        try:
+            response = requests.post(url, cookies=cookies, headers=headers, timeout=timeout)
+            return response
+        except requests.exceptions.RequestException as e:
+            i += 1
+            print(e)
 
 
 def main():
@@ -53,7 +73,7 @@ def main():
         time.sleep(3)  # 等待3秒
         checkin_re = checkin(ck)
         if checkin_re.json()['ret'] == 1:
-            print('签到成功：' + checkin_re.json()['msg'] + '剩余流量：' + checkin_re.json()['traffic'])
+            print('签到成功：' + checkin_re.json()['msg'] + '\n剩余流量：' + checkin_re.json()['traffic'])
         else:
             print('签到失败：' + checkin_re.json()['msg'])
 
